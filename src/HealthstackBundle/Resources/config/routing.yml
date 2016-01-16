@@ -2,6 +2,10 @@ healthstack_patient:
     resource: "@HealthstackBundle/Resources/config/routing/patient.yml"
     prefix:   /patient
 
+healthstack_medicine:
+    resource: "@HealthstackBundle/Resources/config/routing/medicine.yml"
+    prefix:   /medicine
+
 healthstack_homepage:
     path:     /
     defaults: { _controller: HealthstackBundle:Default:index }

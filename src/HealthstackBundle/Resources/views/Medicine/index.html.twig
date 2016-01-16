@@ -1,0 +1,42 @@
+{% set section = 'medicine' %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Medicine list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Vendor</th>
+                <th>Group</th>
+                <th>Code</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medicine in medicines %}
+            <tr>
+                <td><a href="{{ path('medicine_show', { 'id': medicine.id }) }}">{{ medicine.id }}</a></td>
+                <td>{{ medicine.name }}</td>
+                <td>{{ medicine.vendor }}</td>
+                <td>{{ medicine.group }}</td>
+                <td>{{ medicine.code }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('medicine_show', { 'id': medicine.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('medicine_edit', { 'id': medicine.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('medicine_new') }}">Create a new entry</a>
+{% endblock %}
