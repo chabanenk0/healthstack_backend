@@ -1,0 +1,3 @@
+healthstack_homepage:
+    path:     /
+    defaults: { _controller: HealthstackBundle:Default:index }
