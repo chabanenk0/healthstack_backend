@@ -1,0 +1,24 @@
+patient_index:
+    path:     /
+    defaults: { _controller: "HealthstackBundle:Patient:index" }
+    methods:  GET
+
+patient_show:
+    path:     /{id}/show
+    defaults: { _controller: "HealthstackBundle:Patient:show" }
+    methods:  GET
+
+patient_new:
+    path:     /new
+    defaults: { _controller: "HealthstackBundle:Patient:new" }
+    methods:  [GET, POST]
+
+patient_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "HealthstackBundle:Patient:edit" }
+    methods:  [GET, POST]
+
+patient_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "HealthstackBundle:Patient:delete" }
+    methods:  DELETE

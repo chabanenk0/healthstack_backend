@@ -1,0 +1,50 @@
+{% set section = 'patient' %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Patient list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Birthday</th>
+                <th>Telephone</th>
+                <th>Avatar</th>
+                <th>Pin</th>
+                <th>Password</th>
+                <th>Token</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
+            <tr>
+                <td><a href="{{ path('patient_show', { 'id': patient.id }) }}">{{ patient.id }}</a></td>
+                <td>{{ patient.firstName }}</td>
+                <td>{{ patient.lastName }}</td>
+                <td>{% if patient.birthday %}{{ patient.birthday|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ patient.telephone }}</td>
+                <td>{{ patient.avatar }}</td>
+                <td>{{ patient.pin }}</td>
+                <td>{{ patient.password }}</td>
+                <td>{{ patient.token }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('patient_show', { 'id': patient.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('patient_edit', { 'id': patient.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('patient_new') }}">Create a new entry</a>
+{% endblock %}

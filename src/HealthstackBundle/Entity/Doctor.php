@@ -39,7 +39,7 @@ class Doctor extends BaseUser
     protected $information;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     protected $approved;
 
