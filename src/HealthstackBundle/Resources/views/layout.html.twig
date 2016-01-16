@@ -44,7 +44,7 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation"{% if section is defined and section == 'home' %} class="active"{% endif %}><a href="#">Home</a></li>
+                <li role="presentation"{% if section is defined and section == 'home' %} class="active"{% endif %}><a href="{{ path('healthstack_homepage') }}">Home</a></li>
                 {% if app.user %}
                     <li role="presentation"{% if section is defined and section == 'patient' %} class="active"{% endif %}><a href="{{ path('patient_index') }}">Patients</a></li>
                     <li role="presentation"{% if section is defined and section == 'medicine' %} class="active"{% endif %}><a href="{{ path('medicine_index') }}">Medicine</a></li>
