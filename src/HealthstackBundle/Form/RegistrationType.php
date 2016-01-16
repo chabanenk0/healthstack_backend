@@ -11,7 +11,6 @@ class RegistrationType extends AbstractType
     {
         $builder->add('firstName');
         $builder->add('lastName');
-        $builder->add('age');
         $builder->add('telephone');
         $builder->add('information', 'Symfony\Component\Form\Extension\Core\Type\TextareaType');
     }

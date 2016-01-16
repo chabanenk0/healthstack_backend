@@ -1,8 +1,17 @@
 {#{% trans_default_domain 'FOSUserBundle' %}#}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
+{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register form-signin'}}) }}
+    <h2 class="form-signin-heading">Registration</h2>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email address'}}) }}
+    {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Login'}}) }}
+    <label for="inputPassword" class="sr-only">Password</label>
+    {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+    {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Password confirmation'}}) }}
+    {{ form_widget(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+    {{ form_widget(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+    {{ form_widget(form.telephone, {'attr': {'class': 'form-control', 'placeholder': 'Telephone'}}) }}
+    {{ form_widget(form.information, {'attr': {'class': 'form-control', 'placeholder': 'Information'}}) }}
+    {#<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>#}
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="{{ 'Register'|trans }}" />
 {{ form_end(form) }}

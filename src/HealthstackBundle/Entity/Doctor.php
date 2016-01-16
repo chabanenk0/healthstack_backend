@@ -29,11 +29,6 @@ class Doctor extends BaseUser
     protected $lastName;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $age;
-
-    /**
      * @ORM\Column(type="string")
      */
     protected $telephone;
@@ -42,6 +37,11 @@ class Doctor extends BaseUser
      * @ORM\Column(type="string")
      */
     protected $information;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $approved;
 
     /**
      * @return mixed
@@ -94,22 +94,6 @@ class Doctor extends BaseUser
     /**
      * @return mixed
      */
-    public function getAge()
-    {
-        return $this->age;
-    }
-
-    /**
-     * @param mixed $age
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getTelephone()
     {
         return $this->telephone;
@@ -138,4 +122,21 @@ class Doctor extends BaseUser
     {
         $this->information = $information;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+
+    /**
+     * @param mixed $approved
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+    }
+
 }
