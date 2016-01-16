@@ -5,7 +5,7 @@ namespace HealthstackBundle\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use HealthstackBundle\Entity\Patient;
 use HealthstackBundle\Form\PatientType;
 

@@ -5,3 +5,8 @@ healthstack_patient:
 healthstack_homepage:
     path:     /
     defaults: { _controller: HealthstackBundle:Default:index }
+
+api_auth:
+    path:     /api/auth
+    defaults: { _controller: "HealthstackBundle:Api:auth" }
+    methods:  GET
