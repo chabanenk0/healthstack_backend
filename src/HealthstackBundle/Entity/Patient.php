@@ -45,6 +45,11 @@ class Patient
     protected $telephone;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="patient")
+     */
+    protected $tickets;
+
+    /**
      * @ORM\Column(type="string", nullable=true)
      *
      * @Assert\NotBlank(message="Please, upload the product brochure as a PDF file.")
