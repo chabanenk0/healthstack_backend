@@ -82,7 +82,7 @@
     <ul class="nav nav-pills pull-left">
         <li role="presentation"><a class="header-color" href=""><img src="/bundles/healthstack/images/logo.png"></a></li>
     </ul>
-    {% if section is defined and section == 'home' %}
+    {% if section is not defined or section != 'login' %}
     <ul class="nav nav-pills pull-right">
         {#<li role="presentation"{% if section is defined and section == 'home' %} class="active"{% endif %}><a href="{{ path('healthstack_homepage') }}">Home</a></li>#}
         {% if app.user %}
