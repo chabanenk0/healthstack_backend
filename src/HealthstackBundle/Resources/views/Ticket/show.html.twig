@@ -22,6 +22,32 @@
                 <th>Activestatus</th>
                 <td>{% if ticket.activeStatus %}Yes{% else %}No{% endif %}</td>
             </tr>
+            <tr>
+                <th>Items</th>
+                <td>
+                    <ul>
+                    {% for item in ticket.items %}
+                        <li>
+                            {{ item.medicine.name }}:
+                            Dose: {{ item.dose }}
+                            {{ item.countPerDay }} times per day, {{ item.totalDays }} days.
+                            Take a drug on the following time:
+                            <ul>
+                                {% if item.takeTime1.getTimestamp()>-7200 %}
+                                    <li>{{ item.takeTime1|date('H:i:s') }}</li>
+                                {% endif %}
+                                {% if item.takeTime2.getTimestamp()>-7200 %}
+                                    <li>{{ item.takeTime2|date('H:i:s') }}</li>
+                                {% endif %}
+                                {% if item.takeTime3.getTimestamp()>-7200 %}
+                                    <li>{{ item.takeTime3|date('H:i:s') }}</li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

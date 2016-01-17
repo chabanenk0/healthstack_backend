@@ -4,7 +4,7 @@
 {% block content %}
     <h1>Patient</h1>
 
-    <table>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -28,7 +28,26 @@
             </tr>
             <tr>
                 <th>Avatar</th>
-                <td><img src="/avatars/{{ patient.avatar }}" style="max-width: 200px;"></td>
+                <td>
+                    {% if patient.avatar %}
+                    <img src="/avatars/{{ patient.avatar }}" style="max-width: 200px;">
+                    {% else %}
+                    none
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Tickets</th>
+                <td>
+                    <ul>
+                        {% for ticket in patient.tickets %}
+                            <li>
+                                {{ loop.index }}) <a href="{{ path('ticket_show', {'id': ticket.id}) }}">{{ ticket.visitDate|date('y-m-d h:i') }}</a>
+                            </li>
+                        {% endfor %}
+                        <a class="btn btn-primary" href="{{ path('ticket_new') }}?patient_id={{ patient.id }}">Create a new ticket</a>
+                    </ul>
+                </td>
             </tr>
         </tbody>
     </table>

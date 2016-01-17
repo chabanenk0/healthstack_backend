@@ -215,4 +215,22 @@ class Patient
     {
         $this->token = $token;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @param mixed $tickets
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+
 }

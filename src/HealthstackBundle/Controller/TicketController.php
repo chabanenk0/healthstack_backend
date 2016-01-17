@@ -37,6 +37,14 @@ class TicketController extends Controller
     public function newAction(Request $request)
     {
         $ticket = new Ticket();
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('HealthstackBundle:Patient')->findOneById($request->get('patient_id'));
+
+        if ($patient) {
+            $ticket->setPatient($patient);
+        }
+
         $form = $this->createForm('HealthstackBundle\Form\TicketType', $ticket);
         $form->handleRequest($request);
         $originalItems = new ArrayCollection();
@@ -46,7 +54,6 @@ class TicketController extends Controller
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
 
             foreach ($originalItems as $item) {
                 $item->setTicket($ticket);
