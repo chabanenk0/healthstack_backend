@@ -19,14 +19,21 @@ class PatientController extends Controller
      * Lists all Patient entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM HealthstackBundle:Patient a";
+        $query = $em->createQuery($dql);
 
-        $patients = $em->getRepository('HealthstackBundle:Patient')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
         return $this->render('HealthstackBundle:Patient:index.html.twig', array(
-            'patients' => $patients,
+            'pagination' => $pagination,
         ));
     }
 
