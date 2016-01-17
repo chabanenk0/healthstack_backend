@@ -7,16 +7,16 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Vendor</th>
-                <th>Group</th>
-                <th>Code</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Name', 'a.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Vendor', 'a.vendor') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Group', 'a.group') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Code', 'a.code') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for medicine in medicines %}
+        {% for medicine in pagination %}
             <tr>
                 <td><a href="{{ path('medicine_show', { 'id': medicine.id }) }}">{{ medicine.id }}</a></td>
                 <td>{{ medicine.name }}</td>
@@ -37,6 +37,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 
     <a class="btn btn-primary" href="{{ path('medicine_new') }}">Create a new entry</a>
 {% endblock %}
