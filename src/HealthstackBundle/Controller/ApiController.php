@@ -60,23 +60,17 @@ class ApiController extends Controller
 
     public function ticketsAction(Request $request)
     {
-        try {
-            $requestArray = json_decode($request->getContent(), true);
-        } catch (Exception $e) {
-            return new JsonResponse('{"error": "Unable to decode json"}', 401);
-        }
-        if (empty($requestArray)) {
-            return new JsonResponse('{"error": "Bad request"}', 401);
-        }
-        var_dump($requestArray);
+        $headers = $request->server->getHeaders();
 
-        $patientId = $requestArray['patient_id'];
-
+        if (!array_key_exists('TOKEN', $headers)) {
+            return new JsonResponse('{"error": "No token provided"}', 401);
+        }
+        $token = $headers['TOKEN'];
         $timestamp = $request->get('timestamp');
 
         $em = $this->getDoctrine()->getManager();
 
-        $patient = $em->getRepository('HealthstackBundle:Patient')->findOneById($patientId);
+        $patient = $em->getRepository('HealthstackBundle:Patient')->findOneBy(['token' => $token]);
 
         if (!$patient) {
             return new JsonResponse('{"error": "User not found"}', 401);
@@ -120,7 +114,7 @@ class ApiController extends Controller
             'patient_id' => $ticket->getPatient()->getId(),
             'patient_name' => $ticket->getPatient()->getFirstName() . $ticket->getPatient()->getLastName(),
             'hash' => $ticket->getHash(),
-            'created' => $ticket->getVisitDate()->format('Y-m-d'),
+            'created' => $ticket->getVisitDate()->getTimestamp(),
             'symptomes' => $ticket->getSymptomes(),
             'diagnosis' => $ticket->getDiagnosis(),
             'items' => $this->serializeTicketItems($ticket->getItems()),
@@ -138,9 +132,9 @@ class ApiController extends Controller
                 'total_days' => $item->getTotalDays(),
                 'dose' => $item->getDose(),
                 'dose_amount' => $item->getDoseAmount(),
-                'take_time1' => $item->getTakeTime1()->format('H:i:s'),
-                'take_time2' => $item->getTakeTime2()->format('H:i:s'),
-                'take_time3' => $item->getTakeTime3()->format('H:i:s'),
+                'take_time1' => $item->getTakeTime1()->format('H') * 60 + $item->getTakeTime1()->format('i'),
+                'take_time2' => $item->getTakeTime2()->format('H') * 60 + $item->getTakeTime2()->format('i'),
+                'take_time3' => $item->getTakeTime3()->format('H') * 60 + $item->getTakeTime3()->format('i'),
             ];
         }
 

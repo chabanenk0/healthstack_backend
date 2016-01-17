@@ -22,4 +22,4 @@ api_auth:
 api_tickets:
     path:     /api/tickets
     defaults: { _controller: "HealthstackBundle:Api:tickets" }
-    methods:  POST
+    methods:  GET
