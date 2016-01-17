@@ -5,7 +5,7 @@ namespace HealthstackBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +23,7 @@ class TicketType extends AbstractType
             'expanded' => false,
             'attr' => ['class' => 'form-control'],
         ]);
-        $builder->add('visitDate', DateType::class);
+        $builder->add('visitDate', DateTimeType::class);
         $builder->add('activeStatus', ChoiceType::class, [
             'choices' => [
                 'Inactive' => false,

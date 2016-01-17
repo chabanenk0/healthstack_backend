@@ -45,6 +45,8 @@ class TicketController extends Controller
             $ticket->setPatient($patient);
         }
 
+        $ticket->setVisitDate(new \DateTime());
+
         $form = $this->createForm('HealthstackBundle\Form\TicketType', $ticket);
         $form->handleRequest($request);
         $originalItems = new ArrayCollection();
