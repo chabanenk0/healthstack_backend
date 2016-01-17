@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use HealthstackBundle\Entity\Ticket;
 use HealthstackBundle\Form\TicketType;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Ticket controller.
@@ -38,9 +39,23 @@ class TicketController extends Controller
         $ticket = new Ticket();
         $form = $this->createForm('HealthstackBundle\Form\TicketType', $ticket);
         $form->handleRequest($request);
+        $originalItems = new ArrayCollection();
+
+        foreach ($ticket->getItems() as $item) {
+            $originalItems->add($item);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            foreach ($originalItems as $item) {
+                $item->setTicket($ticket);
+                if (false === $ticket->getItems()->contains($item)) {
+                    $item->getTicket()->removeElement($ticket);
+                    $em->persist($item);
+                }
+            }
+            $ticket->setHash(base64_encode(openssl_random_pseudo_bytes(3 * (32 >> 2))));
             $em->persist($ticket);
             $em->flush();
 
@@ -73,12 +88,27 @@ class TicketController extends Controller
      */
     public function editAction(Request $request, Ticket $ticket)
     {
+        $em = $this->getDoctrine()->getManager();
+        $originalTicket = $em->getRepository('HealthstackBundle:Ticket')->findOneBy(['id' => $ticket->getId()]);
+        $originalItems = new ArrayCollection();
+
+        foreach ($originalTicket->getItems() as $item) {
+            $originalItems->add($item);
+        }
+
         $deleteForm = $this->createDeleteForm($ticket);
         $editForm = $this->createForm('HealthstackBundle\Form\TicketType', $ticket);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            foreach ($originalItems as $item) {
+                $item->setTicket($ticket);
+                if (false === $ticket->getItems()->contains($item)) {
+                    //$item->getTicket()->removeElement($ticket);
+                    $em->remove($item);
+                }
+            }
+
             $em->persist($ticket);
             $em->flush();
 

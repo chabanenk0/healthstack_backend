@@ -8,6 +8,7 @@
 
 namespace HealthstackBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,10 +56,15 @@ class Ticket
     protected $diagnosis;
 
     /**
-     * @ORM\OneToMany(targetEntity="TicketItem", mappedBy="ticket")
+     * @ORM\OneToMany(targetEntity="TicketItem", mappedBy="ticket", cascade="persist")
      */
     protected $items;
 
+
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
     /**
      * @return mixed

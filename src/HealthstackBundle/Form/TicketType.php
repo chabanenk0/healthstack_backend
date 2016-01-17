@@ -4,6 +4,7 @@ namespace HealthstackBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -39,6 +40,13 @@ class TicketType extends AbstractType
             'attr' => ['class' => 'form-control'],
             'required' => false,
         ]);
+
+        $builder->add('items', CollectionType::class, [
+            'entry_type' => TicketItemType::class,
+            'allow_add'    => true,
+            'allow_delete' => true,
+        ]);
+
     }
 
 
