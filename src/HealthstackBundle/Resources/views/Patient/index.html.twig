@@ -1,53 +1,189 @@
 {% set section = 'patient' %}
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+    {% block stylesheets %}
+        {% stylesheets
+        'bundles/healthstack/css/*'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
+        {% block css_inline %}
+            a {
+            color: inherit;
+            }
+            .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: block;
+            padding-top: 20px;
+            overflow-x: hidden;
+            overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            background-color: #383649;
+            border-right: 1px solid #eee;
+            color: white;
+            }
+            .box {
+            padding: 10px;
+            padding-top: 20px;
+            }
+            .top-null {
+
+            }
+            .nav-box2 {
+            top: 0;
+            bottom: 0;
+            left: 100px;
+            padding-top:0;
+            margin-top: 0;
+            height: 80px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            }
+            .box-search {
+            padding-right: 150px;
+            padding-top: 25px;
+            float:right;
+            }
+            .box-search2 {
+            padding-right: 50px;
+            padding-top: 27px;
+            float:right;
+            }
+
+            .list-box {
+            padding-left: 30px;
+            padding-top: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            margin:50px;
+            margin-left:160px;
+            padding-right: 100px;
+
+            }
+            .list-user {
+            color: #888888 !important;
+            }
+            .circle {
+            width: 25px;
+            height: 25px;
+            background: #383649;
+            -moz-border-radius: 12.5px;
+            -webkit-border-radius: 12.5px;
+            border-radius: 25px;
+            }
+            .letter-j {
+            font-size: 14pt;
+            color: white;
+            margin-left: 7px;
+            }
+            .padding-right {
+            margin-right: 120px;
+            }
+            .buton-add-user {
+            padding-right: 20px;
+
+            float:right;
+            }
+            .btnchange {
+            background: #fa5c5d;
+            color: white;
+            border-radius: 5;
+            border-color: #5b5970;
+            }
+            .activ-menu {
+            width: 5px;
+            height: 50%;
+            background:  #fa5c5d;
+            }
+        {% endblock css_inline %}
+
 {% block content %}
-    <h1>Patient list</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-1 sidebar ">
+                <ul class="nav nav-sidebar">
+                    <li class="box"><img class="padding-left-img" src="/bundles/healthstack/images/istr.png"> <span class="sr-only">(current)</span></li>
+                    <div class="activ-menu">
+                        <li class="box "><a href="{{ path('patient_index') }}">PACIENT LIST</a></li>
+                    </div>
+                    <li class="box"><a href="{{ path('patient_new') }}">ADD USER</a></li>
+                </ul>
+            </div>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'First Name', 'a.firstName') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Last Name', 'a.lastName') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Birthday', 'a.birthday') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Phone', 'a.telephone') }}</th>
-                <th>Avatar</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for patient in pagination %}
-            <tr>
-                <td><a href="{{ path('patient_show', { 'id': patient.id }) }}">{{ patient.id }}</a></td>
-                <td>{{ patient.firstName }}</td>
-                <td>{{ patient.lastName }}</td>
-                <td>{% if patient.birthday %}{{ patient.birthday|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ patient.telephone }}</td>
-                <td>
-                    {% if patient.avatar %}
-                        <img src="/avatars/{{ patient.avatar }}" style="max-width: 50px;">
-                    {% else %}
-                        none
-                    {% endif %}
-                </td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('patient_show', { 'id': patient.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('patient_edit', { 'id': patient.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="navigation">
-        {{ knp_pagination_render(pagination) }}
+            <div class="col-sm-12 nav-box2">
+                <div class="box-search">
+                    <img class="padding-left-img" style="max-width: 25px;" src="/bundles/healthstack/images/magnifying42-(1).png">
+                </div>
+                <div class="box-search2">
+                    Search pacient by name or phone number
+                </div>
+                {#<div class=" box-search2">#}
+                    {#<div class="circle">#}
+                        {#<div class="letter-j">#}
+                            {#J#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+            </div>
+            <div class="col-sm-9 col-sm-offset-10 col-md-11 col-md-offset-2 main list-box">
+
+                <h2 class="">Patient list <span class="padding-right"><a class="btn btn-default btnchange buton-add-user" type="button" href="{{ path('patient_new') }}">Add user</a></span></h2>
+
+                <div class="table-responsive">
+                    <table class="table table-striped list-user">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>{{ knp_pagination_sortable(pagination, 'First Name', 'a.firstName') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Last Name', 'a.lastName') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Birthday', 'a.birthday') }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'Phone', 'a.telephone') }}</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for patient in pagination %}
+                        <tr>
+                            <td>
+                                {% if patient.avatar %}
+                                    <img src="/avatars/{{ patient.avatar }}" style="max-width: 50px;">
+                                {% else %}
+                                    none
+                                {% endif %}
+                            </td>
+                            <td>{{ patient.firstName }}</td>
+                            <td>{{ patient.lastName }}</td>
+                            <td>{% if patient.birthday %}{{ patient.birthday|date('Y-m-d') }}{% endif %}</td>
+                            <td>{{ patient.telephone }}</td>
+                            <td>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <a href="{{ path('patient_show', { 'id': patient.id }) }}">show</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('patient_edit', { 'id': patient.id }) }}">edit</a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-
-    <a class="btn btn-primary" href="{{ path('patient_new') }}">Create a new entry</a>
 {% endblock %}

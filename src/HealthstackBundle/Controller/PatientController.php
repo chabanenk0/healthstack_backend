@@ -3,6 +3,7 @@
 namespace HealthstackBundle\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -45,9 +46,9 @@ class PatientController extends Controller
     {
         $patient = new Patient();
         $form = $this->createForm('HealthstackBundle\Form\PatientType', $patient);
-        $form->add('avatar', FileType::class, [
-            'required' => false,
-        ]);
+//        $form->add('avatar', FileType::class, [
+//            'required' => false,
+//        ]);
 
         $form->handleRequest($request);
 
@@ -106,7 +107,7 @@ class PatientController extends Controller
         $editForm = $this->createForm('HealthstackBundle\Form\PatientType', $patient);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted()) { // && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($patient);
             $em->flush();

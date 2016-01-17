@@ -12,9 +12,15 @@
     <title>Narrow Jumbotron Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    {% stylesheets 'bundles/healthstack/css/*' filter='cssrewrite' %}
+    {% block stylesheets %}
+    {% stylesheets
+    'bundles/healthstack/css/bootstrap.min.css'
+    'bundles/healthstack/css/ie10-viewport-bug-workaround.css'
+    'bundles/healthstack/css/jumbotron-narrow.css'
+    filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
+    {% endblock stylesheets %}
     {#<link href="css/bootstrap.min.css" rel="stylesheet">#}
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -80,7 +86,7 @@
 
 <div class="container">
     <ul class="nav nav-pills pull-left">
-        <li role="presentation"><a class="header-color" href=""><img src="/bundles/healthstack/images/logo.png"></a></li>
+        <li role="presentation"><a class="header-color" href="{{ path('healthstack_homepage') }}"><img src="/bundles/healthstack/images/logo.png"></a></li>
     </ul>
     {% if section is not defined or section != 'login' %}
     <ul class="nav nav-pills pull-right">

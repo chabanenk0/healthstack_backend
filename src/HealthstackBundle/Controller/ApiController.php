@@ -51,7 +51,7 @@ class ApiController extends Controller
             'firstName' => $patient->getFirstName(),
             'lastName' => $patient->getLastName(),
             'birthday' => $patient->getBirthday()->format('Y-m-d'),
-            'telephone' => $patient->getTelephone(),
+            'telephone' => $patient->getTelephotne(),
             'avatar' => $avatarsDir = $this->container->getParameter('kernel.root_dir').'/../web/avatars/' . $patient->getAvatar(),
             'pin' => $patient->getPin(),
             'token' => $patient->getToken(),
