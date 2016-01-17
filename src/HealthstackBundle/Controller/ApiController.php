@@ -89,7 +89,7 @@ class ApiController extends Controller
             $q  = $qb->select('t')
                 ->from('HealthstackBundle:Ticket', 't')
                 ->where(
-                    $qb->expr()->gt('t.visitDate', $timestampString)
+                    $qb->expr()->gte('t.visitDate', $timestampString)
                 )
                 ->getQuery();
 
