@@ -52,17 +52,9 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('patient_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('patient_edit', { 'id': patient.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <a class="btn btn-primary" href="{{ path('patient_index') }}">Back to the list</a>
+    <a class="btn btn-primary" href="{{ path('patient_edit', { 'id': patient.id }) }}">Edit</a>
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
 {% endblock %}

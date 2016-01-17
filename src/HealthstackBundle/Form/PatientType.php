@@ -21,7 +21,12 @@ class PatientType extends AbstractType
         $builder
             ->add('firstName', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('lastName', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('birthday', DateType::class)
+            ->add('birthday', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+            ])
             ->add('telephone', TextType::class, ['attr' => ['class' => 'form-control']])
 //            ->add('avatar', FileType::class, [
 //                'required' => false,

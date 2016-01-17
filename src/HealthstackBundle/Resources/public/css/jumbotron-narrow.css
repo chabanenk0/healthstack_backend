@@ -1,8 +1,18 @@
 /* Space out content a bit */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
+
+  @font-face {
+      font-family: Roboto-Regular; 
+      src: url(../fonts/Roboto-Regular.ttf); 
+  }
+  body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #584f62;
+    color: white;
+    font-family: Roboto-Regular;
+  /*  background: linear-gradient( #804f70, #5c3860);*/
+  }
+ 
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -34,17 +44,24 @@ body {
 /* Customize container */
 @media (min-width: 768px) {
   .container {
-    max-width: 730px;
+    max-width: 1170px; 
+
   }
 }
 .container-narrow > hr {
   margin: 30px 0;
 }
+/*.containerdown {
+    position: fixed;
+    bottom: 0;
+  }*/
+  
 
 /* Main marketing message and sign up button */
-.jumbotron {
+.jumbotr {
+  margin-top: 5px;
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+  
 }
 .jumbotron .btn {
   padding: 14px 24px;
@@ -77,25 +94,106 @@ body {
     border-bottom: 0;
   }
   .form-signin {
-  max-width: 330px;
-  padding: 15px;
-  margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
   }
- .form-signin .form-signin-heading,
  .form-signin .checkbox {
-  margin-bottom: 10px;
+   margin-bottom: 10px;
+  }
+  .form-signin input {
+    margin-bottom: 20px;
+    background: transparent; 
+     border: 0;
+     border-bottom: 2px solid white; 
+     opacity: 0.4; 
   }
  .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
   }
  .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
  .form-signin .checkbox {
-  font-weight: normal;
+    font-weight: normal;
   }
+  .btn {
+    background: #fa5c5d;
+    border-radius: 0;
+  }
+  .textopacity {
+    opacity: 0.5; 
+  }
+  .btnchange {
+    background: #fa5c5d;
+    color: white;
+    border-radius: 0;
+    border-color: #5b5970;
+  }
+  .btnchange-input {
+  border-color: #5b5970;
+  background: #383649;
+  }
+  .btnchange2 {
+    background: #584f62;
+    border-radius: 0;
+  }
+  .btnnaw, input>.btnnaw{
+    background: white;
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 5px !important;
+    color: #584f62 !important;
+  }
+  .active-nav, nav>.active-nav{
+    background: #fa5c5d !important;
+     margin-left: 0 !important;
+     margin-right: 5px !important;
+    color: white !important;
+    border-radius: 0 !important;
+  }
+  .nav-pills>li.active>a,.nav-pills>li.active>a:focus,.nav-pills>li.active>a:hover{
+    color:white !important;
+    background-color:#fa5c5d;
+  }
+  .li-header {
+    font-weight: bolder;
+    margin-right: 5px;
+  }
+  .header-color {
+    color:white;
+  }
+  .center-text {
+    text-align: center;
+  }
+  .color-red {
+    color: #fa5c5d;
+  }
+  .bottom-text {
+    text-align: center;
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 700px;
+  }
+
+  .center-img {
+    margin-top: 60px;
+  }
+  .bottom-field {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    max-width: 60%;
+  }
+  @font-face {
+    font-family:  Mh;
+    src: url(fonts/Merriweather-Bold.ttf); 
+   }
+   .fount-MerH2 {
+    font-family:  Mh, 'Comic Sans MS', cursive;
+   }
+  
 }

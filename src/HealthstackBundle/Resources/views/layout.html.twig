@@ -37,28 +37,63 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style type="text/css">
+        @font-face {
+            font-family:  Mh;
+            src: url(/bundles/healthstack/fonts/Merriweather-Bold.ttf);
+        }
+        .fount-MerH2 {
+            font-family:  Mh, 'Comic Sans MS', cursive;
+            line-height: 38pt;
+
+
+        }
+        .center-text2 {
+            margin-top: 20%;
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+            font-size: 26px;
+            max-width: 700px;
+        }
+        .bottom-text {
+            text-align: center;
+            margin-top: 10%;
+            margin-right: auto;
+            margin-left: auto;
+            max-width: 700px;
+            font-size: 36px;
+        }
+
+        body {
+            background-image: url(/bundles/healthstack/images/Home.png);
+            background-size: 100%;
+        }
+    </style>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body>
 
 <div class="container">
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation"{% if section is defined and section == 'home' %} class="active"{% endif %}><a href="{{ path('healthstack_homepage') }}">Home</a></li>
-                {% if app.user %}
-                    <li role="presentation"{% if section is defined and section == 'patient' %} class="active"{% endif %}><a href="{{ path('patient_index') }}">Patients</a></li>
-                    <li role="presentation"{% if section is defined and section == 'medicine' %} class="active"{% endif %}><a href="{{ path('medicine_index') }}">Medicine</a></li>
-                    <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">Log out</a></li>
-                {% else %}
-                    <li role="presentation"{% if section is defined and section == 'register' %} class="active"{% endif %}><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-                    <li role="presentation"{% if section is defined and section == 'login' %} class="active"{% endif %}><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-        <h3 class="text-muted">Project name</h3>
-    </div>
+    <ul class="nav nav-pills pull-left">
+        <li role="presentation"><a class="header-color" href="">LOGO</a></li>
+    </ul>
+    <ul class="nav nav-pills pull-right">
+        {#<li role="presentation"{% if section is defined and section == 'home' %} class="active"{% endif %}><a href="{{ path('healthstack_homepage') }}">Home</a></li>#}
+        {% if app.user %}
+            <li role="presentation"><a{% if section is defined and section == 'patient' %} class="active-nav"{% else %} class="header-color"{% endif %} href="{{ path('patient_index') }}">Patients</a></li>
+            <li role="presentation"><a{% if section is defined and section == 'medicine' %} class="active-nav"{% else %} class="header-color"{% endif %} href="{{ path('medicine_index') }}">Medicine</a></li>
+            <li role="presentation"><a class="header-color" href="{{ path('fos_user_security_logout') }}">Log out</a></li>
+        {% else %}
+            {#<li role="presentation"{% if section is defined and section == 'register' %} class="active"{% endif %}><a href="{{ path('fos_user_registration_register') }}">Register</a></li>#}
+            <li role="presentation"><a class="header-color" href="">HOW IT WORKS</a></li>
+            <li role="presentation"><a class="header-color" href="">CONTACT</a></li>
+            <li role="presentation"><a{% if section is defined and section == 'login' %} class="active-nav"{% else %} class="header-color"{% endif %} href="{{ path('fos_user_security_login') }}">LOGIN</a></li>
+        {% endif %}
+    </ul>
+    </nav>
 
     {% block content %}
     <div class="jumbotron">
@@ -78,9 +113,9 @@
     </div>
     {% endblock content %}
 
-    <footer class="footer">
-        <p>&copy; 2016 Company, Inc.</p>
-    </footer>
+    {#<footer class="footer">#}
+        {#<p>&copy; 2016 Company, Inc.</p>#}
+    {#</footer>#}
 
 </div> <!-- /container -->
 
