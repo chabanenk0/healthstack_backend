@@ -1,0 +1,16 @@
+{% set section = 'ticket' %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Ticket edit</h1>
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}
+        <input class="btn btn-primary" type="submit" value="Edit" />
+    {{ form_end(edit_form) }}
+
+    <a class="btn btn-primary" href="{{ path('ticket_index') }}">Back to the list</a>
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}

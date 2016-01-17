@@ -1,0 +1,42 @@
+{% set section = 'ticket' %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Ticket list</h1>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Visitdate</th>
+                <th>Activestatus</th>
+                <th>Symptomes</th>
+                <th>Diagnosys</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.id }}</a></td>
+                <td>{% if ticket.visitDate %}{{ ticket.visitDate|date('Y-m-d H:i') }}{% endif %}</td>
+                <td>{% if ticket.activeStatus %}Yes{% else %}No{% endif %}</td>
+                <td>{{ ticket.symptomes }}</td>
+                <td>{{ ticket.diagnosis }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('ticket_new') }}">Create a new entry</a>
+{% endblock %}

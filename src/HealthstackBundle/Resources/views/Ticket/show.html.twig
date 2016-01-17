@@ -1,0 +1,33 @@
+{% set section = 'ticket' %}
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block content %}
+    <h1>Ticket</h1>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ticket.id }}</td>
+            </tr>
+            <tr>
+                <th>Hash</th>
+                <td>{{ ticket.hash }}</td>
+            </tr>
+            <tr>
+                <th>Visitdate</th>
+                <td>{% if ticket.visitDate %}{{ ticket.visitDate|date('Y-m-d H:i') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Activestatus</th>
+                <td>{% if ticket.activeStatus %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" href="{{ path('ticket_index') }}">Back to the list</a>
+    <a class="btn btn-primary" href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>
+    {{ form_start(delete_form) }}
+        <input class="btn btn-danger" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+{% endblock %}

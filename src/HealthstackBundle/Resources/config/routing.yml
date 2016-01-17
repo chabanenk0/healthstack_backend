@@ -6,6 +6,10 @@ healthstack_medicine:
     resource: "@HealthstackBundle/Resources/config/routing/medicine.yml"
     prefix:   /medicine
 
+healthstack_ticket:
+    resource: "@HealthstackBundle/Resources/config/routing/ticket.yml"
+    prefix:   /ticket
+
 healthstack_homepage:
     path:     /
     defaults: { _controller: HealthstackBundle:Default:index }
@@ -13,4 +17,4 @@ healthstack_homepage:
 api_auth:
     path:     /api/auth
     defaults: { _controller: "HealthstackBundle:Api:auth" }
-    methods:  GET
+    methods:  POST

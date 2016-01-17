@@ -24,7 +24,7 @@ class Ticket
     protected $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $hash;
 
@@ -43,6 +43,16 @@ class Ticket
      * @ORM\Column(type="boolean", nullable=true)
      */
     protected $activeStatus;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $symptomes;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $diagnosis;
 
     /**
      * @ORM\OneToMany(targetEntity="TicketItem", mappedBy="ticket")
@@ -113,4 +123,69 @@ class Ticket
     {
         $this->activeStatus = $activeStatus;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPatient()
+    {
+        return $this->patient;
+    }
+
+    /**
+     * @param mixed $patient
+     */
+    public function setPatient($patient)
+    {
+        $this->patient = $patient;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSymptomes()
+    {
+        return $this->symptomes;
+    }
+
+    /**
+     * @param mixed $symptomes
+     */
+    public function setSymptomes($symptomes)
+    {
+        $this->symptomes = $symptomes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiagnosis()
+    {
+        return $this->diagnosis;
+    }
+
+    /**
+     * @param mixed $diagnosis
+     */
+    public function setDiagnosis($diagnosis)
+    {
+        $this->diagnosis = $diagnosis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * @param mixed $items
+     */
+    public function setItems($items)
+    {
+        $this->items = $items;
+    }
+
 }
