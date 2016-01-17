@@ -26,7 +26,7 @@ class TicketItemType extends AbstractType
         $builder->add('dose', TextType::class, [
             'attr' => ['class' => 'form-control'],
         ]);
-        $builder->add('doseAmount', IntegerType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('doseAmount', IntegerType::class, ['attr' => ['class' => 'form-control'], 'label' => 'Amount to buy']);
         $builder->add('takeTime1', TimeType::class, ['attr' => ['class' => 'form-control']]);
         $builder->add('takeTime2', TimeType::class, ['attr' => ['class' => 'form-control']]);
         $builder->add('takeTime3', TimeType::class, ['attr' => ['class' => 'form-control']]);

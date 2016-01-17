@@ -23,3 +23,8 @@ api_tickets:
     path:     /api/tickets
     defaults: { _controller: "HealthstackBundle:Api:tickets" }
     methods:  GET
+
+api_medicines:
+    path:     /api/medicines
+    defaults: { _controller: "HealthstackBundle:Api:medicines" }
+    methods:  GET

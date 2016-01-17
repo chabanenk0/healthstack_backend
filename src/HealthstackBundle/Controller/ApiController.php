@@ -77,20 +77,16 @@ class ApiController extends Controller
         }
         $timestampObject = new \DateTime();
         $timestampObject->setTimestamp($timestamp);
-        try {
-            $timestampString = "'".$timestampObject->format('Y-m-d H:i:s')."'";
-        } catch (Exception $e){
-            return new JsonResponse('{"error": "Unable to interprete the date"}', 401);
-        }
 
         if ($timestamp) {
             $qb = $em->createQueryBuilder();
 
             $q  = $qb->select('t')
                 ->from('HealthstackBundle:Ticket', 't')
-                ->where(
-                    $qb->expr()->gte('t.visitDate', $timestampString)
-                )
+                ->where('t.visitDate > :date_from')
+                ->andWhere('t.patient = :patient')
+                ->setParameter('date_from', $timestampObject)
+                ->setParameter('patient', $patient)
                 ->getQuery();
 
             $tickets = $q->getResult();
@@ -139,5 +135,52 @@ class ApiController extends Controller
         }
 
         return $items;
+    }
+
+    public function medicinesAction(Request $request)
+    {
+        $headers = $request->server->getHeaders();
+
+        if (!array_key_exists('TOKEN', $headers)) {
+            return new JsonResponse('{"error": "No token provided"}', 401);
+        }
+        $token = $headers['TOKEN'];
+        $timestamp = $request->get('timestamp');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('HealthstackBundle:Patient')->findOneBy(['token' => $token]);
+
+        if (!$patient) {
+            return new JsonResponse('{"error": "User not found"}', 401);
+        }
+        $timestampObject = new \DateTime();
+        $timestampObject->setTimestamp($timestamp);
+
+        if ($timestamp) {
+            $qb = $em->createQueryBuilder();
+
+            $q  = $qb->select('t')
+                ->from('HealthstackBundle:Ticket', 't')
+                ->where('t.visitDate > :date_from')
+                ->andWhere('t.patient = :patient')
+                ->andWhere('t.activeStatus = true')
+                ->setParameter('date_from', $timestampObject)
+                ->setParameter('patient', $patient)
+                ->getQuery();
+
+            $tickets = $q->getResult();
+        } else {
+            $tickets = $em->getRepository('HealthstackBundle:Ticket')->findBy([
+                'patient' => $patient,
+                'activeStatus' => true,
+            ]);
+        }
+        $medicines = [];
+        foreach ($tickets as $ticket) {
+            $medicines = array_merge($medicines, $this->serializeTicketItems($ticket->getItems()));
+        }
+
+        return new JsonResponse($medicines, 200);
     }
 }
