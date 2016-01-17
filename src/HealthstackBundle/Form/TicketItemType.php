@@ -5,6 +5,7 @@ namespace HealthstackBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -26,6 +27,9 @@ class TicketItemType extends AbstractType
             'attr' => ['class' => 'form-control'],
         ]);
         $builder->add('doseAmount', IntegerType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('takeTime1', TimeType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('takeTime2', TimeType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('takeTime3', TimeType::class, ['attr' => ['class' => 'form-control']]);
     }
 
 

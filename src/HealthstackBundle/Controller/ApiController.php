@@ -2,6 +2,7 @@
 
 namespace HealthstackBundle\Controller;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -55,5 +56,94 @@ class ApiController extends Controller
             'pin' => $patient->getPin(),
             'token' => $patient->getToken(),
         ];
+    }
+
+    public function ticketsAction(Request $request)
+    {
+        try {
+            $requestArray = json_decode($request->getContent(), true);
+        } catch (Exception $e) {
+            return new JsonResponse('{"error": "Unable to decode json"}', 401);
+        }
+        if (empty($requestArray)) {
+            return new JsonResponse('{"error": "Bad request"}', 401);
+        }
+        var_dump($requestArray);
+
+        $patientId = $requestArray['patient_id'];
+
+        $timestamp = $request->get('timestamp');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $patient = $em->getRepository('HealthstackBundle:Patient')->findOneById($patientId);
+
+        if (!$patient) {
+            return new JsonResponse('{"error": "User not found"}', 401);
+        }
+        $timestampObject = new \DateTime();
+        $timestampObject->setTimestamp($timestamp);
+        try {
+            $timestampString = "'".$timestampObject->format('Y-m-d H:i:s')."'";
+        } catch (Exception $e){
+            return new JsonResponse('{"error": "Unable to interprete the date"}', 401);
+        }
+
+        if ($timestamp) {
+            $qb = $em->createQueryBuilder();
+
+            $q  = $qb->select('t')
+                ->from('HealthstackBundle:Ticket', 't')
+                ->where(
+                    $qb->expr()->gt('t.visitDate', $timestampString)
+                )
+                ->getQuery();
+
+            $tickets = $q->getResult();
+        } else {
+            $tickets = $em->getRepository('HealthstackBundle:Ticket')->findBy([
+                'patient' => $patient,
+            ]);
+        }
+        $ticketsArray = [];
+        foreach ($tickets as $ticket) {
+            $ticketsArray[] = $this->serializeTicket($ticket);
+        }
+
+        return new JsonResponse($ticketsArray, 200);
+    }
+
+    private function serializeTicket($ticket)
+    {
+        return [
+            'id' => $ticket->getId(),
+            'patient_id' => $ticket->getPatient()->getId(),
+            'patient_name' => $ticket->getPatient()->getFirstName() . $ticket->getPatient()->getLastName(),
+            'hash' => $ticket->getHash(),
+            'created' => $ticket->getVisitDate()->format('Y-m-d'),
+            'symptomes' => $ticket->getSymptomes(),
+            'diagnosis' => $ticket->getDiagnosis(),
+            'items' => $this->serializeTicketItems($ticket->getItems()),
+        ];
+    }
+    private function serializeTicketItems($ticketItems)
+    {
+        $items = [];
+        foreach($ticketItems as $item) {
+            $items[] = [
+                'id' => $item->getId(),
+                'medicine_id' => $item->getMedicine()->getId(),
+                'medicine_name' => $item->getMedicine()->getName(),
+                'count_per_day' => $item->getCountPerDay(),
+                'total_days' => $item->getTotalDays(),
+                'dose' => $item->getDose(),
+                'dose_amount' => $item->getDoseAmount(),
+                'take_time1' => $item->getTakeTime1()->format('H:i:s'),
+                'take_time2' => $item->getTakeTime2()->format('H:i:s'),
+                'take_time3' => $item->getTakeTime3()->format('H:i:s'),
+            ];
+        }
+
+        return $items;
     }
 }

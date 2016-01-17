@@ -57,6 +57,21 @@ class TicketItem
     protected $doseAmount;
 
     /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    protected $takeTime1;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    protected $takeTime2;
+
+    /**
+     * @ORM\Column(type="time", nullable=true)
+     */
+    protected $takeTime3;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -166,5 +181,53 @@ class TicketItem
     public function setDoseAmount($doseAmount)
     {
         $this->doseAmount = $doseAmount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTakeTime1()
+    {
+        return $this->takeTime1;
+    }
+
+    /**
+     * @param mixed $takeTime1
+     */
+    public function setTakeTime1($takeTime1)
+    {
+        $this->takeTime1 = $takeTime1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTakeTime2()
+    {
+        return $this->takeTime2;
+    }
+
+    /**
+     * @param mixed $takeTime2
+     */
+    public function setTakeTime2($takeTime2)
+    {
+        $this->takeTime2 = $takeTime2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTakeTime3()
+    {
+        return $this->takeTime3;
+    }
+
+    /**
+     * @param mixed $takeTime3
+     */
+    public function setTakeTime3($takeTime3)
+    {
+        $this->takeTime3 = $takeTime3;
     }
 }
