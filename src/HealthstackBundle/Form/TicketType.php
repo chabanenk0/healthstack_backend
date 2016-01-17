@@ -21,23 +21,23 @@ class TicketType extends AbstractType
             'choice_label' => 'lastName',
             'multiple' => false,
             'expanded' => false,
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
         ]);
-        $builder->add('visitDate', DateTimeType::class);
+        $builder->add('visitDate', DateTimeType::class,['attr' => ['class' => 'form-control btnchange-input']]);
         $builder->add('activeStatus', ChoiceType::class, [
             'choices' => [
                 'Inactive' => false,
                 'Active' => true,
             ],
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
             'required' => false,
         ]);
         $builder->add('symptomes', TextType::class, [
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
             'required' => false,
         ]);
         $builder->add('diagnosis', TextType::class, [
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
             'required' => false,
         ]);
 

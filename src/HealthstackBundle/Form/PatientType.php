@@ -19,27 +19,27 @@ class PatientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('lastName', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('firstName', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
+            ->add('lastName', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
             ->add('birthday', DateType::class, [
                 'widget' => 'single_text',
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control btnchange-input',
                 ],
             ])
-            ->add('telephone', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('telephone', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
 //            ->add('avatar', FileType::class, [
 //                'required' => false,
 //            ])
             ->add('pin', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control btnchange-input',
                 ],
             ])
-            ->add('password', PasswordType::class, ['attr' => ['class' => 'form-control']])
+            ->add('password', PasswordType::class, ['attr' => ['class' => 'form-control btnchange-input']])
             ->add('token', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control btnchange-input',
                 ],
                 'required' => false,
             ])

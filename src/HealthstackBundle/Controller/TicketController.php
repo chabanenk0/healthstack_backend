@@ -46,6 +46,7 @@ class TicketController extends Controller
         }
 
         $ticket->setVisitDate(new \DateTime());
+        $ticket->setActiveStatus(true);
 
         $form = $this->createForm('HealthstackBundle\Form\TicketType', $ticket);
         $form->handleRequest($request);

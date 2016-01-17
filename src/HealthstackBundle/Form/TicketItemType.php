@@ -19,17 +19,17 @@ class TicketItemType extends AbstractType
             'choice_label' => 'name',
             'multiple' => false,
             'expanded' => false,
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
         ]);
-        $builder->add('countPerDay', IntegerType::class, ['attr' => ['class' => 'form-control']]);
-        $builder->add('totalDays', IntegerType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('countPerDay', IntegerType::class, ['attr' => ['class' => 'form-control btnchange-input']]);
+        $builder->add('totalDays', IntegerType::class, ['attr' => ['class' => 'form-control btnchange-input']]);
         $builder->add('dose', TextType::class, [
-            'attr' => ['class' => 'form-control'],
+            'attr' => ['class' => 'form-control btnchange-input'],
         ]);
-        $builder->add('doseAmount', IntegerType::class, ['attr' => ['class' => 'form-control'], 'label' => 'Amount to buy']);
-        $builder->add('takeTime1', TimeType::class, ['attr' => ['class' => 'form-control']]);
-        $builder->add('takeTime2', TimeType::class, ['attr' => ['class' => 'form-control']]);
-        $builder->add('takeTime3', TimeType::class, ['attr' => ['class' => 'form-control']]);
+        $builder->add('doseAmount', IntegerType::class, ['attr' => ['class' => 'form-control btnchange-input'], 'label' => 'Amount to buy']);
+        $builder->add('takeTime1', TimeType::class, ['attr' => ['class' => 'form-control btnchange-input']]);
+        $builder->add('takeTime2', TimeType::class, ['attr' => ['class' => 'form-control btnchange-input']]);
+        $builder->add('takeTime3', TimeType::class, ['attr' => ['class' => 'form-control btnchange-input']]);
     }
 
 

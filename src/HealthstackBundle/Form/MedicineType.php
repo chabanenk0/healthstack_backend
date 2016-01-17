@@ -16,10 +16,10 @@ class MedicineType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('vendor', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('group', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('code', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('name', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
+            ->add('vendor', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
+            ->add('group', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
+            ->add('code', TextType::class, ['attr' => ['class' => 'form-control btnchange-input']])
         ;
     }
     
